@@ -28,7 +28,7 @@ public class PADLVisitorMain {
         assert models != null;
 
         // Generate PlantUML code from the PADL model using PlantUMLGenerator
-        final String generatedString = models.generate(new PlantUMLGenerator());
+        final String generatedString = models.generate(new PlantUmlVisitor());
         // Print the generated PlantUML code
         System.out.println(generatedString);
     }
