@@ -20,15 +20,18 @@ public class PADLVisitorMain {
         // Hardcoded folder name for demonstration purposes
         String folderName = "PlantUMLGenerator/out/padl/event/";
         // Read folder name from user input if needed
-        // String folderName = scanner.nextLine();
+         folderName = scanner.nextLine();
 
         // Create PADL model from the specified folder
         final ICodeLevelModel models = PADLModel.createPADLModel(folderName);
         // Ensure models is not null
         assert models != null;
 
+        System.out.println("Is Ghost needed? ");
+        boolean isGhostNeeded = scanner.nextBoolean();
+
         // Generate PlantUML code from the PADL model using PlantUMLGenerator
-        final String generatedString = models.generate(new PlantUmlVisitor());
+        final String generatedString = models.generate(new PlantUmlVisitor(isGhostNeeded));
         // Print the generated PlantUML code
         System.out.println(generatedString);
     }

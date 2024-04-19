@@ -18,6 +18,10 @@ public class PlantUmlVisitor implements IGenerator {
      * @return The PlantUML description as a StringBuilder.
      */
 
+    boolean isGhostNeeded = false;
+    public PlantUmlVisitor(boolean flag){
+        this.isGhostNeeded = flag;
+    }
     public StringBuffer getPlantUMLDescription() {
         return plantUMLDescription;
     }
@@ -63,7 +67,8 @@ public class PlantUmlVisitor implements IGenerator {
 
     @Override
     public void close(final IGhost aGhost) {
-        this.printTopEntityClose(aGhost);
+        if(isGhostNeeded)
+            this.printTopEntityClose(aGhost);
     }
 
     @Override
@@ -205,10 +210,12 @@ public class PlantUmlVisitor implements IGenerator {
 
     @Override
     public void open(final IGhost aGhost) {
-        plantUMLDescription.append("\n");
-        plantUMLDescription.append("\t\t\t");
-        plantUMLDescription.append("class ").append(String.valueOf(aGhost.getName())).append(" {");
-        plantUMLDescription.append("\n");
+        if(isGhostNeeded) {
+            plantUMLDescription.append("\n");
+            plantUMLDescription.append("\t\t\t");
+            plantUMLDescription.append("class ").append(String.valueOf(aGhost.getName())).append(" {");
+            plantUMLDescription.append("\n");
+        }
 
 
     }
